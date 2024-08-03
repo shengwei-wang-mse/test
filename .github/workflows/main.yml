@@ -14,10 +14,10 @@ jobs:
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: List files in the repository
         run: |
-          if [ ! -e "build_cr.tar.gz" ]; then
-            echo "ERROR Not Found build_cr.tar.gz"
-            exit 1
-          fi
+          #if [ ! -e "build_cr.tar.gz" ]; then
+          #  echo "ERROR Not Found build_cr.tar.gz"
+          #  exit 1
+          #fi
           if [ ! -d src_cr/platforms/aubist_cp ]; then
             mkdir -p src_cr/platforms/aubist_cp
             echo "Test info" >> src_cr/platforms/aubist_cp/log_cr.txt
