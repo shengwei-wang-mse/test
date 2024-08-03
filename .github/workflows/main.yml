@@ -14,5 +14,21 @@ jobs:
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: List files in the repository
         run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+          if [ ! -e "build_cr.tar.gz" ]; then
+            echo "ERROR Not Found build_cr.tar.gz"
+            exit 1
+          fi
+          if [ ! -d src_cr/platforms/aubist_cp ]; then
+            mkdir -p src_cr/platforms/aubist_cp
+            echo "Test info" >> src_cr/platforms/aubist_cp/log_cr.txt
+          fi
+          failed_count=$(grep -c "FAILED:" src_cr/platforms/aubist_cp/log_cr.txt)
+          if [ $failed_count != 0 ]; then 
+            if [ $failed_count==1 ] && [ $(grep -C 5 "FAILED:" src_cr/platforms/aubist_cp/log_cr.txt | grep -c "cr:base_cr.axf") == 1 ]; then
+              echo "base_cr rebuilded "
+            else
+              echo "ERROR: Build failed"
+              exit 1
+            fi
+          fi
+          echo "OK"
