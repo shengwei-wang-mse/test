@@ -24,11 +24,9 @@ jobs:
             echo "Test info" >> src_cr/platforms/aubist_cp/log_cr.txt
           fi
           echo "-----2------"
-          failed_count=$(grep -c "FAILED:" src_cr/platforms/aubist_cp/log_cr.txt)
-
-          echo "-----3------"
-          if [ $failed_count != 0 ]; then 
-            echo "-----4------"
+          if [ $(grep -c "FAILED:" src_cr/platforms/aubist_cp/log_cr.txt) != 0 ]; then 
+            failed_count=$(grep -c "FAILED:" src_cr/platforms/aubist_cp/log_cr.txt)
+            echo "-----3------"
             if [ $failed_count==1 ] && [ $(grep -C 5 "FAILED:" src_cr/platforms/aubist_cp/log_cr.txt | grep -c "cr:base_cr.axf") == 1 ]; then
               echo "base_cr rebuilded "
             else
