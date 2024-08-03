@@ -22,6 +22,7 @@ jobs:
           if [ ! -d src_cr/platforms/aubist_cp ]; then
             mkdir -p src_cr/platforms/aubist_cp
             echo "Test info" >> src_cr/platforms/aubist_cp/log_cr.txt
+            echo "FAILED: 111" >> src_cr/platforms/aubist_cp/log_cr.txt
           fi
           echo "-----2------"
           if [ $(grep -c "FAILED:" src_cr/platforms/aubist_cp/log_cr.txt) != 0 ]; then 
